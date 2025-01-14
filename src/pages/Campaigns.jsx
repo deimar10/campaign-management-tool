@@ -1,15 +1,17 @@
 import React from "react";
 import Sidebar from "../components/Sidebar";
 
-function Home() {
+function Campaigns() {
     return (
         <div style={{ display: "flex" }}>
             <Sidebar />
             <main style={{ flexGrow: 1, padding: "16px" }}>
-                {/* main content */}
+                <div>
+
+                </div>
             </main>
         </div>
     )
 }
 
-export default Home;
+export default Campaigns;
