@@ -1,0 +1,42 @@
+.MuiDrawer-root {
+    .MuiPaper-root  {
+
+        .MuiListItem-root {
+            padding-bottom: 15px;
+            padding-top: 15px;
+            &.current {
+                background-color: #a0acc957;
+            }
+            &:hover {
+                cursor: pointer;
+            }
+            &:nth-child(1) {
+                .MuiListItemIcon-root .MuiSvgIcon-root {
+                    background: #ff5400;
+                }
+            
+            }
+            &:nth-child(2) {
+                .MuiListItemIcon-root .MuiSvgIcon-root {
+                    background: #ff00e9;
+                }
+            
+            }
+        }
+
+        .MuiListItemIcon-root {
+            min-width: 45px;
+            .MuiSvgIcon-root {
+                border-radius: 5px;
+                padding: 5px;
+                height: 1.15em;
+                width: 1.15em;
+            }
+        }
+        .MuiListItemText-root {
+            .MuiTypography-root  {
+                font-weight: 600;
+            }
+        }
+    }
+}
