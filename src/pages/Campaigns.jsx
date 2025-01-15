@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import '../scss/Campaigns.scss'
+import '../scss/Campaigns.scss';
 import Sidebar from "../components/Sidebar";
 import CampaignFilters from "../components/CampaignFilters";
 import { Table, TableBody, TableCell, TableHead, TableRow, Tooltip  } from "@mui/material";
