@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import '../scss/CreateCampaigns.scss';
+import '../scss/pages/CreateCampaigns.scss';
 import { useForm } from "react-hook-form";
 import Sidebar from "../components/Sidebar";
 
@@ -32,9 +32,9 @@ function CreateCampaigns() {
     };
 
     return (
-        <div style={{ display: "flex" }}>
+        <div className="layout">
             <Sidebar />
-            <div className="create-campaigns-main-container">
+           <main className="main-content">
                 <h2>Create your own campaign here!</h2>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <label>Title</label>
@@ -100,7 +100,7 @@ function CreateCampaigns() {
                     </select>
                     <input type="submit" />
                 </form>
-            </div>
+            </main>
         </div>
     )
 }

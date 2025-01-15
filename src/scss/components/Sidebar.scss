@@ -1,6 +1,12 @@
-.MuiDrawer-root {
-    .MuiPaper-root  {
+@use '../config' as *;
 
+.sidebar {
+    .MuiPaper-root  {
+        background: #1c1c1cbd;
+        width: $sidebar-width;
+        position: fixed; 
+        height: 100%; 
+        z-index: $z-index-navbar;
         .MuiListItem-root {
             padding-bottom: 15px;
             padding-top: 15px;
@@ -9,24 +15,6 @@
             }
             &:hover {
                 cursor: pointer;
-            }
-            &:nth-child(1) {
-                .MuiListItemIcon-root .MuiSvgIcon-root {
-                    background: #d8662c;
-                }
-            
-            }
-            &:nth-child(2) {
-                .MuiListItemIcon-root .MuiSvgIcon-root {
-                    background: #c531b9;
-                }
-            
-            }
-            &:nth-child(3) {
-                .MuiListItemIcon-root .MuiSvgIcon-root {
-                    background: #32be5c;
-                }
-            
             }
         }
 
@@ -37,11 +25,13 @@
                 padding: 5px;
                 height: 1.15em;
                 width: 1.15em;
+                background: $primary-color;
             }
         }
         .MuiListItemText-root {
             .MuiTypography-root  {
                 font-weight: 600;
+                color: $text-color-light;
             }
         }
     }

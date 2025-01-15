@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import '../scss/Sidebar.scss';
+import '../scss/components/Sidebar.scss';
 import { Drawer, List, ListItem, ListItemText, ListItemIcon } from "@mui/material";
 import HomeIcon from '@mui/icons-material/Home';
 import CampaignIcon from '@mui/icons-material/Campaign';
@@ -25,7 +25,7 @@ const Sidebar = () => {
 
 
   return (
-    <Drawer variant="permanent" anchor="left">
+    <Drawer className="sidebar" variant="permanent" anchor="left">
       <List>
         <ListItem 
             onClick={handleHome}
