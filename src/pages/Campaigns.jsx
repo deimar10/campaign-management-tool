@@ -33,7 +33,7 @@ function Campaigns() {
 
     const [filteredCampaigns, setFilteredCampaigns] = useState(campaigns);
 
-    const handleFilter = ({ search, status, country }) => {
+    const handleFilter = ({ search, status }) => {
         let filtered = campaigns;
     
         if (search) {
@@ -44,9 +44,6 @@ function Campaigns() {
         if (status !== "all") {
           filtered = filtered.filter((campaign) => campaign.status === status);
         }
-        if (country !== "all") {
-          filtered = filtered.filter((campaign) => campaign.country === country);
-        }
     
         setFilteredCampaigns(filtered);
     };
@@ -55,49 +52,56 @@ function Campaigns() {
         <div className="layout">
             <Sidebar />
             <main className="main-content">
-                <CampaignFilters onFilter={handleFilter} />
-                <Table>
-                    <TableHead>
-                    <TableRow>
-                        <TableCell>Title</TableCell>
-                        <TableCell>Landing Page URL</TableCell>
-                        <TableCell>Payout</TableCell>
-                        <TableCell>Status</TableCell>
-                    </TableRow>
-                    </TableHead>
-                    <TableBody>
-                    {filteredCampaigns.map((campaign) => (
-                        <>
-                            <TableRow key={campaign.id}>
-                                <TableCell>{campaign.title}</TableCell>
-                                <TableCell>
-                                    <a href={campaign.url} target="_blank" rel="noopener noreferrer">
-                                        {campaign.url}
-                                    </a>
-                                </TableCell>
-                                <TableCell >
-                                    {campaign.payouts.map((payout, index) => (
-                                        <div key={index}>
-                                            <strong>{payout.country}</strong>: {payout.amount}
-                                        </div>
-                                    ))}
-                                </TableCell>
-                                <TableCell>
-                                    {campaign.status === "active" ? (
-                                        <Tooltip title="Active">
-                                        <CheckCircleIcon className="StatusIcon" id="active" />
-                                        </Tooltip>
-                                    ) : (
-                                        <Tooltip title="Paused">
-                                        <CancelIcon className="StatusIcon" id="paused" />
-                                        </Tooltip>
-                                    )}
-                                </TableCell>
-                            </TableRow>
-                        </>
-                    ))}
-                    </TableBody>
-                </Table>
+                <div className="campaign-page-container">
+                    <CampaignFilters onFilter={handleFilter} />
+                    <Table className="campaign-table">
+                        <TableHead>
+                        <TableRow>
+                            <TableCell>Title</TableCell>
+                            <TableCell>Landing Page URL</TableCell>
+                            <TableCell>Payout</TableCell>
+                            <TableCell>Status</TableCell>
+                        </TableRow>
+                        </TableHead>
+                        <TableBody>
+                        {filteredCampaigns.map((campaign) => (
+                            <>
+                                <TableRow key={campaign.id}>
+                                    <TableCell>{campaign.title}</TableCell>
+                                    <TableCell>
+                                        <a href={campaign.url} target="_blank">
+                                            {campaign.url}
+                                        </a>
+                                    </TableCell>
+                                    <TableCell >
+                                        {campaign.payouts.map((payout, index) => (
+                                            <Tooltip
+                                                key={index}
+                                                title={`Payout for ${payout.country}: ${payout.amount}`}
+                                            >
+                                                <div className="payout-detail">
+                                                    <strong>{payout.country}</strong>: {payout.amount}
+                                                </div>
+                                            </Tooltip>
+                                        ))}
+                                    </TableCell>
+                                    <TableCell className="status-cell">
+                                        {campaign.status === "active" ? (
+                                            <Tooltip title="Active">
+                                            <CheckCircleIcon className="status-icon" id="active" />
+                                            </Tooltip>
+                                        ) : (
+                                            <Tooltip title="Paused">
+                                            <CancelIcon className="status-icon" id="paused" />
+                                            </Tooltip>
+                                        )}
+                                    </TableCell>
+                                </TableRow>
+                            </>
+                        ))}
+                        </TableBody>
+                    </Table>
+                </div>
             </main>
         </div>
     )

@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-import { TextField, Select, MenuItem, Button } from "@mui/material";
+import { TextField, Select, MenuItem } from "@mui/material";
 
 const CampaignFilters = ({ onFilter }) => {
   const [search, setSearch] = useState("");
   const [status, setStatus] = useState("all");
-  const [country, setCountry] = useState("all");
 
   const handleFilter = () => {
-    onFilter({ search, status, country });
+    onFilter({ search, status });
   };
 
   return (
@@ -29,20 +28,9 @@ const CampaignFilters = ({ onFilter }) => {
         <MenuItem value="active">Active</MenuItem>
         <MenuItem value="paused">Paused</MenuItem>
       </Select>
-      <Select
-        value={country}
-        onChange={(e) => setCountry(e.target.value)}
-        size="small"
-        variant="outlined"
-      >
-        <MenuItem value="all">All Countries</MenuItem>
-        <MenuItem value="estonia">Estonia</MenuItem>
-        <MenuItem value="spain">Spain</MenuItem>
-        <MenuItem value="bulgaria">Bulgaria</MenuItem>
-      </Select>
-      <Button variant="contained" onClick={handleFilter}>
+      <button className="button-primary" variant="contained" onClick={handleFilter}>
         Apply Filters
-      </Button>
+      </button>
     </div>
   );
 };

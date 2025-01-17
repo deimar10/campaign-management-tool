@@ -5,6 +5,7 @@ import blob from '/assets/blob.svg';
 import secondBlob from '/assets/blob_2.svg';
 import wave from '/assets/wave.svg';
 import secondWave from '/assets/wave_2.svg';
+import clipboard from '/assets/vecteezy_purple-clipboard.png';
 
 function Home() {
     return (
@@ -21,7 +22,7 @@ function Home() {
                         <button>Create campaign</button>
                     </div>
                     <div className="col">
-                        <h1>right column</h1>
+                        <img className="clipboard" src={clipboard} alt="clipboard" />
                     </div>
                 </div>
                 <img className="blob" src={blob} alt="blob" />
