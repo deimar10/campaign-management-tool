@@ -116,7 +116,7 @@ function CreateCampaigns() {
                                 </select>
 
                                 {/* Submit Button */}
-                                <button className="button-primary" type="submit">
+                                <button className="btn-grad" type="submit">
                                     Submit Campaign
                                 </button>
                             </div>

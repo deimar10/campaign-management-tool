@@ -28,7 +28,7 @@ const CampaignFilters = ({ onFilter }) => {
         <MenuItem value="active">Active</MenuItem>
         <MenuItem value="paused">Paused</MenuItem>
       </Select>
-      <button className="button-primary" variant="contained" onClick={handleFilter}>
+      <button className="btn-grad" variant="contained" onClick={handleFilter}>
         Apply Filters
       </button>
     </div>

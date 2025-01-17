@@ -44,6 +44,23 @@ $secondary-font: '';
     }
   }
 
+  .btn-grad {background-image: linear-gradient(to right, $primary-color 0%, $secondary-color  51%, $accent-color  100%)}
+  .btn-grad {
+     text-align: center;
+     transition: 0.5s;
+     background-size: 200% auto;
+     color: white;            
+     box-shadow: 0 0 20px #eee;
+     display: block;
+   }
+
+   .btn-grad:hover {
+     background-position: right center; /* change the direction of the change here */
+     color: #fff;
+     text-decoration: none;
+   }
+  
+
 // Spacing
 $spacing-unit: 1rem; 
 
