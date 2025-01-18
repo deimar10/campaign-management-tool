@@ -14,14 +14,26 @@
         font-weight: 600;
         text-align: left;
         padding: 1rem;
-        &:last-of-type {
+        &:nth-child(4) {
             text-align: center;
+        }
+        &:nth-child(5) {
+          text-align: right;
+        }
+        &:last-of-type {
+          text-align: right;
         }
       }
   
       td {
         padding: 1rem;
         border-bottom: 1px solid #eee;
+        &:nth-child(5) {
+          text-align: right;
+        }
+        &:last-of-type {
+          text-align: right;
+        }
       }
   
       .campaign-row {
@@ -64,6 +76,11 @@
           &#paused {
             fill: rgb(214, 58, 58);
           }
+        }
+      }
+      .edit-icon, .delete-icon {
+        &:hover {
+          cursor: pointer;
         }
       }
     }

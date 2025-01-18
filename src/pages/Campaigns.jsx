@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import '../scss/pages/Campaigns.scss';
+import '../scss/components/EditModal.scss';
 import Sidebar from "../components/Sidebar";
 import CampaignFilters from "../components/CampaignFilters";
+import EditModal from '../components/EditModal';
 import { Table, TableBody, TableCell, TableHead, TableRow, Tooltip  } from "@mui/material";
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CancelIcon from '@mui/icons-material/Cancel';
+import EditNoteIcon from '@mui/icons-material/EditNote';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 function Campaigns() {
 
@@ -32,6 +36,11 @@ function Campaigns() {
     ];
 
     const [filteredCampaigns, setFilteredCampaigns] = useState(campaigns);
+    const [selectedCampaign, setSelectedCampaign] = useState({
+        selectedId: '',
+        selectedTitle: '',
+        selectedStatus: ''
+    });
 
     const handleFilter = ({ search, status }) => {
         let filtered = campaigns;
@@ -48,6 +57,23 @@ function Campaigns() {
         setFilteredCampaigns(filtered);
     };
 
+    const handleEditModal = (id, title, status) => {
+        setSelectedCampaign((prev) => ({
+            ...prev,
+            selectedId: id,
+            selectedTitle: title,
+            selectedStatus: status,
+        }));
+    };
+
+    const updateCampaignStatus = (id, newStatus) => {
+        const updatedCampaigns = filteredCampaigns.map((campaign) =>
+            campaign.id === id ? { ...campaign, status: newStatus } : campaign
+        );
+        setFilteredCampaigns(updatedCampaigns);
+        setSelectedCampaign({ selectedId: '', selectedTitle: '', selectedStatus: '' });
+    };
+
     return (
         <div className="layout">
             <Sidebar />
@@ -61,6 +87,8 @@ function Campaigns() {
                             <TableCell>Landing Page URL</TableCell>
                             <TableCell>Payout</TableCell>
                             <TableCell>Status</TableCell>
+                            <TableCell>Edit</TableCell>
+                            <TableCell>Delete</TableCell>
                         </TableRow>
                         </TableHead>
                         <TableBody>
@@ -96,11 +124,31 @@ function Campaigns() {
                                             </Tooltip>
                                         )}
                                     </TableCell>
+                                    <TableCell>
+                                        <Tooltip title="Edit">
+                                            <EditNoteIcon className="edit-icon" onClick={() => handleEditModal(campaign.id, campaign.title, campaign.status)} />
+                                        </Tooltip>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Tooltip title="Delete">
+                                            <DeleteIcon className="delete-icon" />
+                                        </Tooltip>
+                                    </TableCell>
                                 </TableRow>
                             </>
                         ))}
                         </TableBody>
                     </Table>
+                </div>
+                <div className="modal-main-container">
+                    {selectedCampaign.selectedId ? (
+                        <EditModal 
+                            campaignId={selectedCampaign.selectedId} 
+                            campaignTitle={selectedCampaign.selectedTitle} 
+                            campaignStatus={selectedCampaign.selectedStatus}
+                            onUpdateStatus={updateCampaignStatus}
+                        />
+                    ) : null}
                 </div>
             </main>
         </div>
