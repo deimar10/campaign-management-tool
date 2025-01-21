@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import '../scss/pages/Campaigns.scss';
 import '../scss/components/EditModal.scss';
 import Sidebar from "../components/Sidebar";
@@ -10,32 +10,9 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import EditNoteIcon from '@mui/icons-material/EditNote';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-function Campaigns() {
+function Campaigns({campaigns}) {
 
-    const campaigns = [
-        { 
-            id: 1, 
-            title: "Campaign 1", 
-            url: "https://example.com", 
-            status: "active",
-            payouts: [
-                { country: "Estonia", amount: "$10" },
-                { country: "Spain", amount: "$15" },
-                { country: "Bulgaria", amount: "$20" },
-              ],
-        },
-        { 
-            id: 2, 
-            title: "Campaign 2", 
-            url: "https://example.com", 
-            status: "paused",
-            payouts: [
-                { country: "Estonia", amount: "$10" },
-            ],
-        },
-    ];
-
-    const [filteredCampaigns, setFilteredCampaigns] = useState(campaigns);
+    const [filteredCampaigns, setFilteredCampaigns] = useState([]);
     const [selectedCampaign, setSelectedCampaign] = useState({
         selectedId: '',
         selectedTitle: '',
@@ -47,7 +24,7 @@ function Campaigns() {
     
         if (search) {
           filtered = filtered.filter((campaign) =>
-            campaign.title.toLowerCase().includes(search.toLowerCase())
+            campaign.title.toLowerCase().includes(search.trim().toLowerCase())
           );
         }
         if (status !== "all") {
@@ -74,6 +51,10 @@ function Campaigns() {
         setSelectedCampaign({ selectedId: '', selectedTitle: '', selectedStatus: '' });
     };
 
+    useEffect(() => {
+        setFilteredCampaigns(campaigns);
+    },[campaigns]);
+
     return (
         <div className="layout">
             <Sidebar />
@@ -92,7 +73,7 @@ function Campaigns() {
                         </TableRow>
                         </TableHead>
                         <TableBody>
-                        {filteredCampaigns.map((campaign) => (
+                        {filteredCampaigns?.map((campaign) => (
                             <>
                                 <TableRow key={campaign.id}>
                                     <TableCell>{campaign.title}</TableCell>

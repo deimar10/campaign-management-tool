@@ -12,7 +12,7 @@ const Sidebar = () => {
   const location = useLocation();
 
   const handleHome = () => {
-    navigate(`/home`);
+    navigate(`/`);
   }
 
   const handleCampaigns = () => {
