@@ -29,7 +29,7 @@ const Sidebar = () => {
       <List>
         <ListItem 
             onClick={handleHome}
-            className={location.pathname === "/home" ? "current" : ""}
+            className={location.pathname === "/" ? "current" : ""}
         >
             <ListItemIcon>
                 <HomeIcon />
