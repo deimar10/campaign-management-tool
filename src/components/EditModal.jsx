@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import '../scss/components/EditModal.scss';
 import { useForm } from "react-hook-form";
+import axios from 'axios';
 
 function Edit({campaignId, campaignTitle, campaignStatus, onUpdateStatus}) {
 
@@ -10,8 +11,15 @@ function Edit({campaignId, campaignTitle, campaignStatus, onUpdateStatus}) {
         setValue,
     } = useForm();
 
-    const onSubmit = (data) => {
-        onUpdateStatus(campaignId, data.status);
+    const onSubmit = async (data) => {
+        try {
+            await axios.put(`http://127.0.0.1:8000/api/campaigns/${campaignId}`, {
+                status: data.status,
+            });
+            onUpdateStatus(campaignId, data.status); 
+        } catch (error) {
+            console.error(error);
+        };
     };
 
     useEffect(() => {

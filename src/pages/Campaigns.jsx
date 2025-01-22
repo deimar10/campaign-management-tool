@@ -10,7 +10,7 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import EditNoteIcon from '@mui/icons-material/EditNote';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-function Campaigns({campaigns}) {
+function Campaigns({campaigns, onCampaignUpdate}) {
 
     const [filteredCampaigns, setFilteredCampaigns] = useState([]);
     const [selectedCampaign, setSelectedCampaign] = useState({
@@ -20,7 +20,7 @@ function Campaigns({campaigns}) {
     });
 
     const handleFilter = ({ search, status }) => {
-        let filtered = campaigns;
+        let filtered =  [...campaigns];;
     
         if (search) {
           filtered = filtered.filter((campaign) =>
@@ -47,6 +47,7 @@ function Campaigns({campaigns}) {
         const updatedCampaigns = filteredCampaigns.map((campaign) =>
             campaign.id === id ? { ...campaign, status: newStatus } : campaign
         );
+        onCampaignUpdate();
         setFilteredCampaigns(updatedCampaigns);
         setSelectedCampaign({ selectedId: '', selectedTitle: '', selectedStatus: '' });
     };

@@ -9,20 +9,27 @@ import axios from 'axios';
 function App() {
 
   const [campaigns, setCampaigns] = useState();
-  
-  useEffect(() => {
-    axios.get('http://127.0.0.1:8000/api/campaigns')
-      .then(response => {
-        const data = response.data;
 
-        const changeStatus = data?.map((campaign) => ({
-          ...campaign,
-          status: campaign.status === 1 ? "active" : "paused",
+  const fetchCampaigns = async () => {
+    try {
+      const response = await axios.get('http://127.0.0.1:8000/api/campaigns');
+      const changeStatus = response.data?.map((campaign) => ({
+        ...campaign,
+        status: campaign.status === 1 ? "active" : "paused",
       }));
-        setCampaigns(changeStatus);
-      })
-      .catch(error => console.error("Error fetching campaigns:", error));
-  },[]);
+      setCampaigns(changeStatus);
+    } catch (error) {
+      console.error("Error fetching campaigns:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchCampaigns();
+  }, []);
+
+  const handleCampaignUpdate = () => {
+    fetchCampaigns();
+  };
 
   return (
     <>
@@ -33,6 +40,7 @@ function App() {
             />
              <Route path="/campaigns" element={<Campaigns
               campaigns={campaigns}
+              onCampaignUpdate ={handleCampaignUpdate}
              />}
             />
             <Route path="/create-campaigns" element={<CreateCampaigns/>}
