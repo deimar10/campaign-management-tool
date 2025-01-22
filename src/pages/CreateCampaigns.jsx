@@ -3,6 +3,7 @@ import '../scss/pages/CreateCampaigns.scss';
 import { useForm } from "react-hook-form";
 import Sidebar from "../components/Sidebar";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import axios from 'axios';
 
 function CreateCampaigns() {
 
@@ -18,9 +19,9 @@ function CreateCampaigns() {
     const selectedCountry = watch("country");
 
     const addPayout = () => {
-        const payout = watch("payout");
-        if (selectedCountry && payout) {
-            setPayouts([...payouts, { country: selectedCountry, payout }]);
+        const amount = watch("payout");
+        if (selectedCountry && amount) {
+            setPayouts([...payouts, { country: selectedCountry, amount }]);
         } else {
             alert("Please select a country and enter a valid payout.");
         }
@@ -28,8 +29,21 @@ function CreateCampaigns() {
 
     const onSubmit = (data) => {
         data.payout = payouts;
-        console.log(data);
-        alert("Campaign Created Successfully!");
+
+        axios.post('http://127.0.0.1:8000/api/campaigns/create', {
+            title: data.title,
+            url: data.url,
+            status: data.status,
+            payouts: payouts,
+        })
+        .then((response) => {
+            console.log(response.status, response.data);
+            alert("Campaign Created Successfully!");
+        })
+        .catch((error) => {
+            console.error(error);
+            alert("Failed to create campaign.");
+        });
     };
 
     return (
