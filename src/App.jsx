@@ -43,7 +43,9 @@ function App() {
               onCampaignUpdate ={handleCampaignUpdate}
              />}
             />
-            <Route path="/create-campaigns" element={<CreateCampaigns/>}
+            <Route path="/create-campaigns" element={<CreateCampaigns
+              onCampaignUpdate ={handleCampaignUpdate}
+            />}
             />
           </Routes>
         </BrowserRouter>

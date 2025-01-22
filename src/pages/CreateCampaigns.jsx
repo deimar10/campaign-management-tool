@@ -5,7 +5,7 @@ import Sidebar from "../components/Sidebar";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import axios from 'axios';
 
-function CreateCampaigns() {
+function CreateCampaigns({onCampaignUpdate}) {
 
     const {
         register,
@@ -37,6 +37,7 @@ function CreateCampaigns() {
             payouts: payouts,
         })
         .then((response) => {
+            onCampaignUpdate();
             console.log(response.status, response.data);
             alert("Campaign Created Successfully!");
         })
