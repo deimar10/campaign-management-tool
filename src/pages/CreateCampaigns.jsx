@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import '../scss/pages/CreateCampaigns.scss';
 import { useForm } from "react-hook-form";
 import Sidebar from "../components/Sidebar";
@@ -11,6 +11,7 @@ function CreateCampaigns({onCampaignUpdate}) {
         register,
         handleSubmit,
         watch,
+        resetField,
         formState: { errors },
     } = useForm();
 
@@ -22,6 +23,8 @@ function CreateCampaigns({onCampaignUpdate}) {
         const amount = watch("payout");
         if (selectedCountry && amount) {
             setPayouts([...payouts, { country: selectedCountry, amount }]);
+            resetField("country");
+            resetField("payout");
         } else {
             alert("Please select a country and enter a valid payout.");
         }
@@ -47,6 +50,20 @@ function CreateCampaigns({onCampaignUpdate}) {
         });
     };
 
+    useEffect(() => {
+        const element = document.getElementById("country");
+        const options = element.getElementsByTagName("option");
+
+        for (let i = 0; i < options.length; i++) {
+            const option = options[i];
+            const isInPayouts = payouts.some((payout) => payout.country === option.value);
+
+            if (isInPayouts) {
+                option.setAttribute("disabled", "disabled");
+            }
+        }
+    }, [payouts, selectedCountry]);
+
     return (
         <div className="layout">
             <Sidebar />
@@ -63,6 +80,10 @@ function CreateCampaigns({onCampaignUpdate}) {
                                     placeholder="Enter campaign title"
                                     {...register("title", {
                                         required: "Title is required",
+                                        minLength: {
+                                            value: 2,
+                                            message: "Title must cointain atleast 2 characters",
+                                        },
                                         maxLength: {
                                             value: 20,
                                             message: "Title cannot exceed 20 characters",
@@ -91,7 +112,7 @@ function CreateCampaigns({onCampaignUpdate}) {
                                 <select
                                     id="country"
                                     {...register("country", {
-                                        required: "Please select at least one country for payout",
+                                        required: payouts.length === 0 ? "Please select at least one country for payout" : false,
                                     })}
                                 >
                                     <option value="">-- Select a Country --</option>
@@ -111,7 +132,7 @@ function CreateCampaigns({onCampaignUpdate}) {
                                             placeholder="Enter payout amount"
                                             {...register("payout", {
                                                 required: "Payout is required",
-                                                min: { value: 0, message: "Payout must be at least 0" },
+                                                min: { value: 5, message: "Payout must be at least 5" },
                                                 max: { value: 99, message: "Payout cannot exceed 99" },
                                             })}
                                         />

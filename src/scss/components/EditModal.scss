@@ -3,10 +3,13 @@
 .modal-main-container {
     padding: 2rem;
     color: black;
-    position: absolute;
+    position: fixed;
     top: 20rem;
-    width: 90%;
+    width: 71%;
     z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     .modal-content-wrapper {
         border-collapse: collapse;
         background-color: #fff;
