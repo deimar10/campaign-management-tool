@@ -121,18 +121,19 @@ function Campaigns({campaigns, onCampaignUpdate}) {
                         ))}
                         </TableBody>
                     </Table>
-                </div>
-                <div className="modal-main-container">
-                    {selectedCampaign.selectedId ? (
-                        <EditModal 
-                            campaignId={selectedCampaign.selectedId} 
-                            campaignTitle={selectedCampaign.selectedTitle} 
-                            campaignStatus={selectedCampaign.selectedStatus}
-                            onUpdateStatus={updateCampaignStatus}
-                        />
-                    ) : null}
+                    <div className="modal-main-container">
+                        {selectedCampaign.selectedId ? (
+                            <EditModal 
+                                campaignId={selectedCampaign.selectedId} 
+                                campaignTitle={selectedCampaign.selectedTitle} 
+                                campaignStatus={selectedCampaign.selectedStatus}
+                                onUpdateStatus={updateCampaignStatus}
+                            />
+                        ) : null}
+                    </div>
                 </div>
             </main>
+            <div className={selectedCampaign.selectedId ? 'filter' : ''}></div>
         </div>
     )
 }

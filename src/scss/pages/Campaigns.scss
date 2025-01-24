@@ -1,5 +1,6 @@
 .campaign-page-container {
     padding: 2rem;
+    position: relative;
   
     .campaign-table {
       width: 100%;
@@ -84,5 +85,13 @@
         }
       }
     }
+  }
+
+  .filter {
+    width: 100%;
+    position: absolute;
+    height: 100%;
+    background: #000000e6;
+    z-index: 10;
   }
   

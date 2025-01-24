@@ -3,6 +3,10 @@
 .modal-main-container {
     padding: 2rem;
     color: black;
+    position: absolute;
+    top: 20rem;
+    width: 90%;
+    z-index: 100;
     .modal-content-wrapper {
         border-collapse: collapse;
         background-color: #fff;
@@ -10,6 +14,8 @@
         overflow: hidden;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.233);
         padding: 1rem;
+        width: 50%;
+        margin: 0 auto;
         form {
             display: flex ;
             flex-direction: column;
