@@ -12,8 +12,34 @@ function CreateCampaigns({onCampaignUpdate}) {
         handleSubmit,
         watch,
         resetField,
+        reset,
+        setError,
         formState: { errors },
     } = useForm();
+
+    const ERROR_MESSAGES = {
+        title: {
+            required: "Title is required",
+            minLength: "Title must contain at least 2 characters",
+            maxLength: "Title cannot exceed 20 characters",
+        },
+        url: {
+            required: "URL is required",
+            pattern: "Please enter a valid URL",
+        },
+        payout: {
+            required: "Payout is required",
+            min: "Payout must be at least 5",
+            max: "Payout canot exceed 99",
+        },
+        country: {
+            required: "Please select at least one country for payout",
+        },
+        server: {
+            unexpected: "An unexpected error occured.",
+            serverError: "Server error. Please try again later."
+        }
+    }
 
     const [payouts, setPayouts] = useState([]);
 
@@ -21,13 +47,23 @@ function CreateCampaigns({onCampaignUpdate}) {
 
     const addPayout = () => {
         const amount = watch("payout");
-        if (selectedCountry && amount) {
-            setPayouts([...payouts, { country: selectedCountry, amount }]);
-            resetField("country");
-            resetField("payout");
-        } else {
-            alert("Please select a country and enter a valid payout.");
+
+        if (!selectedCountry) {
+            alert("Please select a country.");
+            return;
         }
+        if (amount < 5) {
+            setError("payout", { type: "custom", message: ERROR_MESSAGES.payout.min });
+            return;
+        }
+        if (amount > 99) {
+            setError("payout", { type: "custom", message: ERROR_MESSAGES.payout.max });
+            return;
+        }
+
+        setPayouts([...payouts, { country: selectedCountry, amount }]);
+        resetField("country");
+        resetField("payout");
     };
 
     const onSubmit = (data) => {
@@ -42,12 +78,34 @@ function CreateCampaigns({onCampaignUpdate}) {
         .then((response) => {
             onCampaignUpdate();
             console.log(response.status, response.data);
-            alert("Campaign Created Successfully!");
+            alert(response.data.message);
+            // Reset the form fields after a successful response
+            resetForm();
         })
         .catch((error) => {
-            console.error(error);
-            alert("Failed to create campaign.");
+            if (error.response?.status === 422 && error.response?.data?.errors) {
+                const serverErrors = error.response.data.errors;
+                Object.keys(serverErrors).forEach((field) => {
+                    setError(field, { type: "server", message: serverErrors[field][0] });
+                });
+            } else if (error.response?.status === 500) {
+                setError("general", { type: "server", message: ERROR_MESSAGES.server.serverError });
+            } else {
+                setError("general", { type: "server", message: ERROR_MESSAGES.server.unexpected });
+            }
+            console.error("Server error:", error.response?.data);
         });
+    };
+
+    const resetForm = () => {
+        reset({
+            title: "",
+            url: "",
+            status: "active",
+            country: "",
+            payout: "",
+        });
+        setPayouts([]);
     };
 
     useEffect(() => {
@@ -60,6 +118,8 @@ function CreateCampaigns({onCampaignUpdate}) {
 
             if (isInPayouts) {
                 option.setAttribute("disabled", "disabled");
+            } else {
+                option.removeAttribute("disabled");
             }
         }
     }, [payouts, selectedCountry]);
@@ -73,20 +133,21 @@ function CreateCampaigns({onCampaignUpdate}) {
                         <h1>Create your own campaign here!</h1>
                         <form onSubmit={handleSubmit(onSubmit)}>
                             <div className="form-group">
+                            {errors.general && <p className="error-message">{errors.general.message}</p>}
                                 {/* Campaign Title */}
                                 <label htmlFor="title">Campaign Title</label>
                                 <input
                                     id="title"
                                     placeholder="Enter campaign title"
                                     {...register("title", {
-                                        required: "Title is required",
+                                        required: ERROR_MESSAGES.title.required,
                                         minLength: {
                                             value: 2,
-                                            message: "Title must cointain atleast 2 characters",
+                                            message: ERROR_MESSAGES.title.minLength,
                                         },
                                         maxLength: {
                                             value: 20,
-                                            message: "Title cannot exceed 20 characters",
+                                            message: ERROR_MESSAGES.title.maxLength,
                                         },
                                     })}
                                 />
@@ -98,10 +159,10 @@ function CreateCampaigns({onCampaignUpdate}) {
                                     id="url"
                                     placeholder="Enter landing page URL"
                                     {...register("url", {
-                                        required: "URL is required",
+                                        required: ERROR_MESSAGES.url.required,
                                         pattern: {
                                             value: /^(https?:\/\/)?([\w-]+\.)+[\w-]+(\/[\w-]*)*$/,
-                                            message: "Please enter a valid URL",
+                                            message: ERROR_MESSAGES.url.pattern,
                                         },
                                     })}
                                 />
@@ -112,7 +173,7 @@ function CreateCampaigns({onCampaignUpdate}) {
                                 <select
                                     id="country"
                                     {...register("country", {
-                                        required: payouts.length === 0 ? "Please select at least one country for payout" : false,
+                                        required: payouts.length === 0 ? ERROR_MESSAGES.country.required : false,
                                     })}
                                 >
                                     <option value="">-- Select a Country --</option>
@@ -131,9 +192,9 @@ function CreateCampaigns({onCampaignUpdate}) {
                                             type="number"
                                             placeholder="Enter payout amount"
                                             {...register("payout", {
-                                                required: "Payout is required",
-                                                min: { value: 5, message: "Payout must be at least 5" },
-                                                max: { value: 99, message: "Payout cannot exceed 99" },
+                                                required: ERROR_MESSAGES.payout.required,
+                                                min: { value: 5, message: ERROR_MESSAGES.payout.min },
+                                                max: { value: 99, message: ERROR_MESSAGES.payout.max },
                                             })}
                                         />
                                         {errors.payout && <p className="error-message">{errors.payout.message}</p>}
