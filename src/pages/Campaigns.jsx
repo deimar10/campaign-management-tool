@@ -9,6 +9,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CancelIcon from '@mui/icons-material/Cancel';
 import EditNoteIcon from '@mui/icons-material/EditNote';
 import DeleteIcon from '@mui/icons-material/Delete';
+import axios from 'axios';
 
 function Campaigns({campaigns, onCampaignUpdate}) {
 
@@ -50,6 +51,16 @@ function Campaigns({campaigns, onCampaignUpdate}) {
         onCampaignUpdate();
         setFilteredCampaigns(updatedCampaigns);
         setSelectedCampaign({ selectedId: '', selectedTitle: '', selectedStatus: '' });
+    };
+
+    const handleDelete = async (id) => {
+        try {
+            await axios.delete(`http://127.0.0.1:8000/api/campaigns/${id}`)
+            onCampaignUpdate();
+            alert("Campaign Deleted Successfully!");
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     useEffect(() => {
@@ -113,7 +124,7 @@ function Campaigns({campaigns, onCampaignUpdate}) {
                                     </TableCell>
                                     <TableCell>
                                         <Tooltip title="Delete">
-                                            <DeleteIcon className="delete-icon" />
+                                            <DeleteIcon className="delete-icon" onClick={() => handleDelete(campaign.id)} />
                                         </Tooltip>
                                     </TableCell>
                                 </TableRow>
