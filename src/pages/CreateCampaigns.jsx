@@ -69,7 +69,7 @@ function CreateCampaigns({onCampaignUpdate}) {
     const onSubmit = (data) => {
         data.payout = payouts;
 
-        axios.post('http://127.0.0.1:8000/api/campaigns/create', {
+        axios.post(`${import.meta.env.VITE_API_BASE_URL}/create`, {
             title: data.title,
             url: data.url,
             status: data.status,

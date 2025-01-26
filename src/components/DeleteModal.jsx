@@ -6,7 +6,7 @@ function deleteModal({campaignId, campaignTitle, onCampaignUpdate, onClose}) {
 
     const handleDelete = async () => {
         try {
-            await axios.delete(`http://127.0.0.1:8000/api/campaigns/${campaignId}`)
+            await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/${campaignId}`)
             onCampaignUpdate();
             onClose();
         } catch (error) {

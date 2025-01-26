@@ -13,7 +13,7 @@ function Edit({campaignId, campaignTitle, campaignStatus, onUpdateStatus}) {
 
     const onSubmit = async (data) => {
         try {
-            await axios.put(`http://127.0.0.1:8000/api/campaigns/${campaignId}`, {
+            await axios.put(`${import.meta.env.VITE_API_BASE_URL}/${campaignId}`, {
                 status: data.status,
             });
             onUpdateStatus(campaignId, data.status); 
