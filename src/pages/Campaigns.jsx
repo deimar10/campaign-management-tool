@@ -4,6 +4,7 @@ import '../scss/components/EditModal.scss';
 import Sidebar from "../components/Sidebar";
 import CampaignFilters from "../components/CampaignFilters";
 import EditModal from '../components/EditModal';
+import DeleteModal from '../components/DeleteModal';
 import { Table, TableBody, TableCell, TableHead, TableRow, Tooltip  } from "@mui/material";
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CancelIcon from '@mui/icons-material/Cancel';
@@ -19,6 +20,9 @@ function Campaigns({campaigns, onCampaignUpdate}) {
         selectedTitle: '',
         selectedStatus: ''
     });
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
 
     const handleFilter = ({ search, status }) => {
         let filtered =  [...campaigns];;
@@ -42,6 +46,16 @@ function Campaigns({campaigns, onCampaignUpdate}) {
             selectedTitle: title,
             selectedStatus: status,
         }));
+        setIsEditModalOpen(true);
+    };
+
+    const handleDeleteModal = (id, title) => {
+        setSelectedCampaign((prev) => ({
+            ...prev,
+            selectedId: id,
+            selectedTitle: title,
+        }));
+        setIsDeleteModalOpen(true);
     };
 
     const updateCampaignStatus = (id, newStatus) => {
@@ -51,16 +65,7 @@ function Campaigns({campaigns, onCampaignUpdate}) {
         onCampaignUpdate();
         setFilteredCampaigns(updatedCampaigns);
         setSelectedCampaign({ selectedId: '', selectedTitle: '', selectedStatus: '' });
-    };
-
-    const handleDelete = async (id) => {
-        try {
-            await axios.delete(`http://127.0.0.1:8000/api/campaigns/${id}`)
-            onCampaignUpdate();
-            alert("Campaign Deleted Successfully!");
-        } catch (error) {
-            console.error(error);
-        }
+        setIsEditModalOpen(false);
     };
 
     useEffect(() => {
@@ -124,7 +129,7 @@ function Campaigns({campaigns, onCampaignUpdate}) {
                                     </TableCell>
                                     <TableCell>
                                         <Tooltip title="Delete">
-                                            <DeleteIcon className="delete-icon" onClick={() => handleDelete(campaign.id)} />
+                                            <DeleteIcon className="delete-icon" onClick={() => handleDeleteModal(campaign.id, campaign.title,)} />
                                         </Tooltip>
                                     </TableCell>
                                 </TableRow>
@@ -133,7 +138,7 @@ function Campaigns({campaigns, onCampaignUpdate}) {
                         </TableBody>
                     </Table>
                     <div className="modal-main-container">
-                        {selectedCampaign.selectedId ? (
+                        {isEditModalOpen && selectedCampaign.selectedId ? (
                             <EditModal 
                                 campaignId={selectedCampaign.selectedId} 
                                 campaignTitle={selectedCampaign.selectedTitle} 
@@ -141,10 +146,18 @@ function Campaigns({campaigns, onCampaignUpdate}) {
                                 onUpdateStatus={updateCampaignStatus}
                             />
                         ) : null}
+                        {isDeleteModalOpen && selectedCampaign.selectedId ? (
+                            <DeleteModal 
+                                campaignId={selectedCampaign.selectedId} 
+                                campaignTitle={selectedCampaign.selectedTitle} 
+                                onCampaignUpdate={onCampaignUpdate}
+                                onClose={() => setIsDeleteModalOpen(false)}
+                            />
+                        ) : null}
                     </div>
                 </div>
             </main>
-            <div className={selectedCampaign.selectedId ? 'filter' : ''}></div>
+            <div className={isEditModalOpen || isDeleteModalOpen ? 'filter' : ''}></div>
         </div>
     )
 }
