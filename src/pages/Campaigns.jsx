@@ -137,7 +137,7 @@ function Campaigns({campaigns, onCampaignUpdate}) {
                         ))}
                         </TableBody>
                     </Table>
-                    <div className="modal-main-container">
+                    <div className={`modal-main-container ${selectedCampaign.selectedId ? '' : 'hidden'}`}>
                         {isEditModalOpen && selectedCampaign.selectedId ? (
                             <EditModal 
                                 campaignId={selectedCampaign.selectedId} 
