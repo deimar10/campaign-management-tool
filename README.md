@@ -15,9 +15,10 @@
 </div>
 
 ## Frontend Setup and Run Instructions
-  * Ensure you have the following installed:
+  * Ensure you have the following installed and added to your system's PATH:
     * Node.js: Install the latest version from https://nodejs.org/
     * npm (bundled with Node.js): Verify installation with:```npm -v```
+    * git: You can download Git from https://git-scm.com/downloads
   * Clone the Repository
     * ```git clone <repository_url>```
     * ```cd <frontend_folder_name>```
