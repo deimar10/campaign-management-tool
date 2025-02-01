@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import '../scss/components/Sidebar.scss';
 import { Drawer, List, ListItem, ListItemText, ListItemIcon } from "@mui/material";
 import HomeIcon from '@mui/icons-material/Home';

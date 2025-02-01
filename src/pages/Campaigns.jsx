@@ -10,7 +10,6 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CancelIcon from '@mui/icons-material/Cancel';
 import EditNoteIcon from '@mui/icons-material/EditNote';
 import DeleteIcon from '@mui/icons-material/Delete';
-import axios from 'axios';
 
 function Campaigns({campaigns, onCampaignUpdate}) {
 
