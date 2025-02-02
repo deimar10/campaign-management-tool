@@ -1,18 +1,21 @@
 @use '../config' as *;
 
 .sidebar {
-    .MuiPaper-root  {
+    .MuiPaper-root {
         background: #1c1c1cbd;
         width: $sidebar-width;
-        position: fixed; 
-        height: 100%; 
+        position: fixed;
+        height: 100%;
         z-index: $z-index-navbar;
+
         .MuiListItem-root {
             padding-bottom: 15px;
             padding-top: 15px;
+
             &.current {
                 background-color: #a0acc957;
             }
+
             &:hover {
                 cursor: pointer;
             }
@@ -20,6 +23,7 @@
 
         .MuiListItemIcon-root {
             min-width: 45px;
+
             .MuiSvgIcon-root {
                 border-radius: 5px;
                 padding: 5px;
@@ -28,8 +32,9 @@
                 background: $primary-color;
             }
         }
+
         .MuiListItemText-root {
-            .MuiTypography-root  {
+            .MuiTypography-root {
                 font-weight: 600;
                 color: $text-color-light;
             }

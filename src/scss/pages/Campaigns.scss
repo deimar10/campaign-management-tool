@@ -1,97 +1,104 @@
 .campaign-page-container {
-    padding: 2rem;
-    position: relative;
-  
-    .campaign-table {
-      width: 100%;
-      border-collapse: collapse;
-      background-color: #fff;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.233);
-  
-      th {
-        background-color: #f4f4f4;
-        font-weight: 600;
-        text-align: left;
-        padding: 1rem;
-        &:nth-child(4) {
-            text-align: center;
-        }
-        &:nth-child(5) {
-          text-align: right;
-        }
-        &:last-of-type {
-          text-align: right;
-        }
-      }
-  
-      td {
-        padding: 1rem;
-        border-bottom: 1px solid #eee;
-        &:nth-child(5) {
-          text-align: right;
-        }
-        &:last-of-type {
-          text-align: right;
-        }
-      }
-  
-      .campaign-row {
-        &:nth-of-type(even) {
-          background-color: #f9f9f9;
-        }
-  
-        &:hover {
-          background-color: #f0f8ff;
-          cursor: pointer;
-        }
-      }
-  
-      .url-link {
-        color: #1e88e5;
-        text-decoration: none;
-  
-        &:hover {
-          text-decoration: underline;
-        }
-      }
-  
-      .payout-detail {
-        margin-bottom: 0.5rem;
-  
-        &:last-child {
-          margin-bottom: 0;
-        }
-      }
-  
-      .status-cell {
+  padding: 2rem;
+  position: relative;
+
+  .campaign-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.233);
+
+    th {
+      background-color: #f4f4f4;
+      font-weight: 600;
+      text-align: left;
+      padding: 1rem;
+
+      &:nth-child(4) {
         text-align: center;
-  
-        .status-icon {
-          height: 2rem;
-  
-          &#active {
-            fill: rgb(71, 179, 80);
-          }
-          &#paused {
-            fill: rgb(214, 58, 58);
-          }
-        }
       }
-      .edit-icon, .delete-icon {
-        &:hover {
-          cursor: pointer;
+
+      &:nth-child(5) {
+        text-align: right;
+      }
+
+      &:last-of-type {
+        text-align: right;
+      }
+    }
+
+    td {
+      padding: 1rem;
+      border-bottom: 1px solid #eee;
+
+      &:nth-child(5) {
+        text-align: right;
+      }
+
+      &:last-of-type {
+        text-align: right;
+      }
+    }
+
+    .campaign-row {
+      &:nth-of-type(even) {
+        background-color: #f9f9f9;
+      }
+
+      &:hover {
+        background-color: #f0f8ff;
+        cursor: pointer;
+      }
+    }
+
+    .url-link {
+      color: #1e88e5;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    .payout-detail {
+      margin-bottom: 0.5rem;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    .status-cell {
+      text-align: center;
+
+      .status-icon {
+        height: 2rem;
+
+        &#active {
+          fill: rgb(71, 179, 80);
+        }
+
+        &#paused {
+          fill: rgb(214, 58, 58);
         }
       }
     }
-  }
 
-  .filter {
-    width: 100%;
-    position: absolute;
-    height: 100%;
-    background: #000000e6;
-    z-index: 10;
+    .edit-icon,
+    .delete-icon {
+      &:hover {
+        cursor: pointer;
+      }
+    }
   }
-  
+}
+
+.filter {
+  width: 100%;
+  position: absolute;
+  height: 100%;
+  background: #000000e6;
+  z-index: 10;
+}

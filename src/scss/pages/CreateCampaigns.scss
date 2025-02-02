@@ -1,74 +1,75 @@
 .create-campaign-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+
+  .create-campaign-card {
+    background: #fff;
+    border-radius: 8px;
     padding: 2rem;
-  
-    .create-campaign-card {
-      background: #fff;
-      border-radius: 8px;
-      padding: 2rem;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.233);
-      max-width: 600px;
-      width: 100%;
-  
-      h1 {
-        text-align: left;
-        color: #6a1b9a;
-        margin-bottom: 1.5rem;
-      }
-  
-      form {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.233);
+    max-width: 600px;
+    width: 100%;
+
+    h1 {
+      text-align: left;
+      color: #6a1b9a;
+      margin-bottom: 1.5rem;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+
+      .form-group {
         display: flex;
         flex-direction: column;
-  
-        .form-group {
+        gap: 1rem;
+
+        label {
+          font-weight: bold;
+          color: #333;
+        }
+
+        input,
+        select {
+          padding: 0.8rem;
+          font-size: 1rem;
+          border: 1px solid #ddd;
+          border-radius: 4px;
+          background-color: white;
+          color: black;
+
+          &:focus {
+            border-color: #8e24aa;
+            outline: none;
+            box-shadow: 0 0 5px rgba(142, 36, 170, 0.5);
+          }
+        }
+
+        .error-message {
+          font-size: 0.85rem;
+          color: #d32f2f;
+          font-weight: 600;
+          margin: 0px;
+        }
+
+        .payouts {
           display: flex;
           flex-direction: column;
           gap: 1rem;
-  
-          label {
-            font-weight: bold;
-            color: #333;
-          }
-  
-          input,
-          select {
-            padding: 0.8rem;
-            font-size: 1rem;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            background-color: white;
-            color: black;
-  
-            &:focus {
-              border-color: #8e24aa;
-              outline: none;
-              box-shadow: 0 0 5px rgba(142, 36, 170, 0.5);
-            }
-          }
-  
-          .error-message {
-            font-size: 0.85rem;
-            color: #d32f2f;
-            font-weight: 600;
-            margin: 0px;
-          }
-  
-          .payouts {
+
+          .addPayout {
             display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            .addPayout {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                width: 30%;
-                flex-direction: row-reverse;
-                gap: 5px;
-            }
+            justify-content: center;
+            align-items: center;
+            width: 30%;
+            flex-direction: row-reverse;
+            gap: 5px;
           }
         }
       }
     }
   }
+}

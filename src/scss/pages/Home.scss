@@ -4,32 +4,37 @@
     background: $background-gradient;
     position: relative;
     display: flex;
-    
+
     .grid {
         z-index: 10;
         position: relative;
         display: flex;
         justify-content: space-evenly;
         align-items: center;
+
         .col {
             width: 25%;
             text-align: left;
         }
     }
+
     .wave {
         rotate: 180deg;
         position: absolute;
         top: 0;
         left: 0;
     }
+
     .secondWave {
         position: absolute;
         bottom: 0;
     }
+
     .blob {
         position: absolute;
         bottom: 0;
     }
+
     .clipboard {
         width: 500px;
     }
