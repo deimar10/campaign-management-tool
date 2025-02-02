@@ -1,4 +1,4 @@
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Campaigns from './pages/Campaigns';
 import CreateCampaigns from './pages/CreateCampaigns';
@@ -36,15 +36,15 @@ function App() {
       <div className="App">
         <BrowserRouter>
           <Routes>
-            <Route index element={<Home/>}
+            <Route index element={<Home />}
             />
-             <Route path="/campaigns" element={<Campaigns
+            <Route path="/campaigns" element={<Campaigns
               campaigns={campaigns}
-              onCampaignUpdate ={handleCampaignUpdate}
-             />}
+              onCampaignUpdate={handleCampaignUpdate}
+            />}
             />
             <Route path="/create-campaigns" element={<CreateCampaigns
-              onCampaignUpdate ={handleCampaignUpdate}
+              onCampaignUpdate={handleCampaignUpdate}
             />}
             />
           </Routes>

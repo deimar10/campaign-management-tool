@@ -15,7 +15,7 @@ function Home() {
     const handleCreateCampaigns = () => {
         navigate(`/create-campaigns`);
     }
-    
+
     return (
         <div style={{ display: "flex", height: "100%" }}>
             <Sidebar />
@@ -24,8 +24,8 @@ function Home() {
                 <div className="grid">
                     <div className="col">
                         <h1>Campaign Management Tool</h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et 
-                        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                         </p>
                         <button onClick={handleCreateCampaigns}>Create campaign</button>
                     </div>

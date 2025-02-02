@@ -5,13 +5,13 @@ import Sidebar from "../components/Sidebar";
 import CampaignFilters from "../components/CampaignFilters";
 import EditModal from '../components/EditModal';
 import DeleteModal from '../components/DeleteModal';
-import { Table, TableBody, TableCell, TableHead, TableRow, Tooltip  } from "@mui/material";
+import { Table, TableBody, TableCell, TableHead, TableRow, Tooltip } from "@mui/material";
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CancelIcon from '@mui/icons-material/Cancel';
 import EditNoteIcon from '@mui/icons-material/EditNote';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-function Campaigns({campaigns, onCampaignUpdate}) {
+function Campaigns({ campaigns, onCampaignUpdate }) {
 
     const [filteredCampaigns, setFilteredCampaigns] = useState([]);
     const [selectedCampaign, setSelectedCampaign] = useState({
@@ -24,17 +24,17 @@ function Campaigns({campaigns, onCampaignUpdate}) {
 
 
     const handleFilter = ({ search, status }) => {
-        let filtered =  [...campaigns];;
-    
+        let filtered = [...campaigns];;
+
         if (search) {
-          filtered = filtered.filter((campaign) =>
-            campaign.title.toLowerCase().includes(search.trim().toLowerCase())
-          );
+            filtered = filtered.filter((campaign) =>
+                campaign.title.toLowerCase().includes(search.trim().toLowerCase())
+            );
         }
         if (status !== "all") {
-          filtered = filtered.filter((campaign) => campaign.status === status);
+            filtered = filtered.filter((campaign) => campaign.status === status);
         }
-    
+
         setFilteredCampaigns(filtered);
     };
 
@@ -69,7 +69,7 @@ function Campaigns({campaigns, onCampaignUpdate}) {
 
     useEffect(() => {
         setFilteredCampaigns(campaigns);
-    },[campaigns]);
+    }, [campaigns]);
 
     return (
         <div className="layout">
@@ -79,76 +79,76 @@ function Campaigns({campaigns, onCampaignUpdate}) {
                     <CampaignFilters onFilter={handleFilter} />
                     <Table className="campaign-table">
                         <TableHead>
-                        <TableRow>
-                            <TableCell>Title</TableCell>
-                            <TableCell>Landing Page URL</TableCell>
-                            <TableCell>Payout</TableCell>
-                            <TableCell>Status</TableCell>
-                            <TableCell>Edit</TableCell>
-                            <TableCell>Delete</TableCell>
-                        </TableRow>
+                            <TableRow>
+                                <TableCell>Title</TableCell>
+                                <TableCell>Landing Page URL</TableCell>
+                                <TableCell>Payout</TableCell>
+                                <TableCell>Status</TableCell>
+                                <TableCell>Edit</TableCell>
+                                <TableCell>Delete</TableCell>
+                            </TableRow>
                         </TableHead>
                         <TableBody>
-                        {filteredCampaigns?.map((campaign) => (
-                            <>
-                                <TableRow key={campaign.id}>
-                                    <TableCell>{campaign.title}</TableCell>
-                                    <TableCell>
-                                        <a href={campaign.url} target="_blank">
-                                            {campaign.url}
-                                        </a>
-                                    </TableCell>
-                                    <TableCell >
-                                        {campaign.payouts.map((payout, index) => (
-                                            <Tooltip
-                                                key={index}
-                                                title={`Payout for ${payout.country}: ${payout.amount}`}
-                                            >
-                                                <div className="payout-detail">
-                                                    <strong>{payout.country}</strong>: {payout.amount}
-                                                </div>
+                            {filteredCampaigns?.map((campaign) => (
+                                <>
+                                    <TableRow key={campaign.id}>
+                                        <TableCell>{campaign.title}</TableCell>
+                                        <TableCell>
+                                            <a href={campaign.url} target="_blank">
+                                                {campaign.url}
+                                            </a>
+                                        </TableCell>
+                                        <TableCell >
+                                            {campaign.payouts.map((payout, index) => (
+                                                <Tooltip
+                                                    key={index}
+                                                    title={`Payout for ${payout.country}: ${payout.amount}`}
+                                                >
+                                                    <div className="payout-detail">
+                                                        <strong>{payout.country}</strong>: {payout.amount}
+                                                    </div>
+                                                </Tooltip>
+                                            ))}
+                                        </TableCell>
+                                        <TableCell className="status-cell">
+                                            {campaign.status === "active" ? (
+                                                <Tooltip title="Active">
+                                                    <CheckCircleIcon className="status-icon" id="active" />
+                                                </Tooltip>
+                                            ) : (
+                                                <Tooltip title="Paused">
+                                                    <CancelIcon className="status-icon" id="paused" />
+                                                </Tooltip>
+                                            )}
+                                        </TableCell>
+                                        <TableCell>
+                                            <Tooltip title="Edit">
+                                                <EditNoteIcon className="edit-icon" onClick={() => handleEditModal(campaign.id, campaign.title, campaign.status)} />
                                             </Tooltip>
-                                        ))}
-                                    </TableCell>
-                                    <TableCell className="status-cell">
-                                        {campaign.status === "active" ? (
-                                            <Tooltip title="Active">
-                                            <CheckCircleIcon className="status-icon" id="active" />
+                                        </TableCell>
+                                        <TableCell>
+                                            <Tooltip title="Delete">
+                                                <DeleteIcon className="delete-icon" onClick={() => handleDeleteModal(campaign.id, campaign.title,)} />
                                             </Tooltip>
-                                        ) : (
-                                            <Tooltip title="Paused">
-                                            <CancelIcon className="status-icon" id="paused" />
-                                            </Tooltip>
-                                        )}
-                                    </TableCell>
-                                    <TableCell>
-                                        <Tooltip title="Edit">
-                                            <EditNoteIcon className="edit-icon" onClick={() => handleEditModal(campaign.id, campaign.title, campaign.status)} />
-                                        </Tooltip>
-                                    </TableCell>
-                                    <TableCell>
-                                        <Tooltip title="Delete">
-                                            <DeleteIcon className="delete-icon" onClick={() => handleDeleteModal(campaign.id, campaign.title,)} />
-                                        </Tooltip>
-                                    </TableCell>
-                                </TableRow>
-                            </>
-                        ))}
+                                        </TableCell>
+                                    </TableRow>
+                                </>
+                            ))}
                         </TableBody>
                     </Table>
                     <div className={`modal-main-container ${selectedCampaign.selectedId ? '' : 'hidden'}`}>
                         {isEditModalOpen && selectedCampaign.selectedId ? (
-                            <EditModal 
-                                campaignId={selectedCampaign.selectedId} 
-                                campaignTitle={selectedCampaign.selectedTitle} 
+                            <EditModal
+                                campaignId={selectedCampaign.selectedId}
+                                campaignTitle={selectedCampaign.selectedTitle}
                                 campaignStatus={selectedCampaign.selectedStatus}
                                 onUpdateStatus={updateCampaignStatus}
                             />
                         ) : null}
                         {isDeleteModalOpen && selectedCampaign.selectedId ? (
-                            <DeleteModal 
-                                campaignId={selectedCampaign.selectedId} 
-                                campaignTitle={selectedCampaign.selectedTitle} 
+                            <DeleteModal
+                                campaignId={selectedCampaign.selectedId}
+                                campaignTitle={selectedCampaign.selectedTitle}
                                 onCampaignUpdate={onCampaignUpdate}
                                 onClose={() => setIsDeleteModalOpen(false)}
                             />

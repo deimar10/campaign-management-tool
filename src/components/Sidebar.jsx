@@ -23,36 +23,35 @@ const Sidebar = () => {
     navigate(`/create-campaigns`);
   }
 
-
   return (
     <Drawer className="sidebar" variant="permanent" anchor="left">
       <List>
-        <ListItem 
-            onClick={handleHome}
-            className={location.pathname === "/" ? "current" : ""}
+        <ListItem
+          onClick={handleHome}
+          className={location.pathname === "/" ? "current" : ""}
         >
-            <ListItemIcon>
-                <HomeIcon />
-            </ListItemIcon>
-            <ListItemText primary="Home"/>
+          <ListItemIcon>
+            <HomeIcon />
+          </ListItemIcon>
+          <ListItemText primary="Home" />
         </ListItem>
-        <ListItem 
-            onClick={handleCampaigns}
-            className={location.pathname === "/campaigns" ? "current" : ""}
+        <ListItem
+          onClick={handleCampaigns}
+          className={location.pathname === "/campaigns" ? "current" : ""}
         >
-            <ListItemIcon>
-                <CampaignIcon />
-            </ListItemIcon>
-            <ListItemText primary="Campaigns"/>
+          <ListItemIcon>
+            <CampaignIcon />
+          </ListItemIcon>
+          <ListItemText primary="Campaigns" />
         </ListItem>
-        <ListItem 
-            onClick={handleCreateCampaigns}
-            className={location.pathname === "/create-campaigns" ? "current" : ""}
+        <ListItem
+          onClick={handleCreateCampaigns}
+          className={location.pathname === "/create-campaigns" ? "current" : ""}
         >
-            <ListItemIcon>
-                <PostAddIcon />
-            </ListItemIcon>
-            <ListItemText primary="Create Campaigns"/>
+          <ListItemIcon>
+            <PostAddIcon />
+          </ListItemIcon>
+          <ListItemText primary="Create Campaigns" />
         </ListItem>
       </List>
     </Drawer>

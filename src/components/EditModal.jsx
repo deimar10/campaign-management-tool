@@ -3,7 +3,7 @@ import '../scss/components/EditModal.scss';
 import { useForm } from "react-hook-form";
 import axios from 'axios';
 
-function Edit({campaignId, campaignTitle, campaignStatus, onUpdateStatus}) {
+function Edit({ campaignId, campaignTitle, campaignStatus, onUpdateStatus }) {
 
     const {
         register,
@@ -16,7 +16,7 @@ function Edit({campaignId, campaignTitle, campaignStatus, onUpdateStatus}) {
             await axios.put(`${import.meta.env.VITE_API_BASE_URL}/${campaignId}`, {
                 status: data.status,
             });
-            onUpdateStatus(campaignId, data.status); 
+            onUpdateStatus(campaignId, data.status);
         } catch (error) {
             console.error(error);
         };

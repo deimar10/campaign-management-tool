@@ -5,7 +5,7 @@ import Sidebar from "../components/Sidebar";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import axios from 'axios';
 
-function CreateCampaigns({onCampaignUpdate}) {
+function CreateCampaigns({ onCampaignUpdate }) {
 
     const {
         register,
@@ -75,26 +75,26 @@ function CreateCampaigns({onCampaignUpdate}) {
             status: data.status,
             payouts: payouts,
         })
-        .then((response) => {
-            onCampaignUpdate();
-            console.log(response.status, response.data);
-            alert(response.data.message);
-            // Reset the form fields after a successful response
-            resetForm();
-        })
-        .catch((error) => {
-            if (error.response?.status === 422 && error.response?.data?.errors) {
-                const serverErrors = error.response.data.errors;
-                Object.keys(serverErrors).forEach((field) => {
-                    setError(field, { type: "server", message: serverErrors[field][0] });
-                });
-            } else if (error.response?.status === 500) {
-                setError("general", { type: "server", message: ERROR_MESSAGES.server.serverError });
-            } else {
-                setError("general", { type: "server", message: ERROR_MESSAGES.server.unexpected });
-            }
-            console.error("Server error:", error.response?.data);
-        });
+            .then((response) => {
+                onCampaignUpdate();
+                console.log(response.status, response.data);
+                alert(response.data.message);
+                // Reset the form fields after a successful response
+                resetForm();
+            })
+            .catch((error) => {
+                if (error.response?.status === 422 && error.response?.data?.errors) {
+                    const serverErrors = error.response.data.errors;
+                    Object.keys(serverErrors).forEach((field) => {
+                        setError(field, { type: "server", message: serverErrors[field][0] });
+                    });
+                } else if (error.response?.status === 500) {
+                    setError("general", { type: "server", message: ERROR_MESSAGES.server.serverError });
+                } else {
+                    setError("general", { type: "server", message: ERROR_MESSAGES.server.unexpected });
+                }
+                console.error("Server error:", error.response?.data);
+            });
     };
 
     const resetForm = () => {
@@ -133,7 +133,7 @@ function CreateCampaigns({onCampaignUpdate}) {
                         <h1>Create your own campaign here!</h1>
                         <form onSubmit={handleSubmit(onSubmit)}>
                             <div className="form-group">
-                            {errors.general && <p className="error-message">{errors.general.message}</p>}
+                                {errors.general && <p className="error-message">{errors.general.message}</p>}
                                 {/* Campaign Title */}
                                 <label htmlFor="title">Campaign Title</label>
                                 <input

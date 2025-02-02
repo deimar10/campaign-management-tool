@@ -2,7 +2,7 @@ import React from "react";
 import '../scss/components/EditModal.scss';
 import axios from 'axios';
 
-function deleteModal({campaignId, campaignTitle, onCampaignUpdate, onClose}) {
+function deleteModal({ campaignId, campaignTitle, onCampaignUpdate, onClose }) {
 
     const handleDelete = async () => {
         try {
