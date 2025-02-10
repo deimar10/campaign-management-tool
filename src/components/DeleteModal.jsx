@@ -2,7 +2,7 @@ import React from "react";
 import '../scss/components/EditModal.scss';
 import axios from 'axios';
 
-function deleteModal({ campaignId, campaignTitle, onCampaignUpdate, onClose, setModalMessage, sucessModal }) {
+function deleteModal({ campaignId, campaignTitle, onCampaignUpdate, onClose, setModalMessage, sucessModal, errorModal }) {
 
     const handleDelete = async () => {
         try {
@@ -13,6 +13,9 @@ function deleteModal({ campaignId, campaignTitle, onCampaignUpdate, onClose, set
             sucessModal(true);
         } catch (error) {
             console.error(error);
+            onClose();
+            setModalMessage(error.response?.data?.message || "An error occurred.");
+            errorModal(true);
         }
     };
 

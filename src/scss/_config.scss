@@ -45,6 +45,17 @@ $secondary-font: '';
   }
 }
 
+.button-error {
+  @include btn-1;
+  background-color: rgb(214, 58, 58);
+  color: $text-color-light;
+  width: 100%;
+
+  &:hover {
+    background-color: ($secondary-color, 10%);
+  }
+}
+
 .btn-grad {
   background-image: linear-gradient(to right, $primary-color 0%, $secondary-color 51%, $accent-color 100%)
 }
