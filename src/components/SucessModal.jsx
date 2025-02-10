@@ -1,6 +1,6 @@
 import React from "react";
 import "../scss/components/Modal.scss";
-import { Modal, Typography, Button } from "@mui/material";
+import { Modal, Typography } from "@mui/material";
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 const SuccessModal = ({ open, message, onClose }) => {
