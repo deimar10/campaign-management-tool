@@ -26,18 +26,19 @@ $secondary-font: '';
 
 .button-primary {
   @include btn-1;
-  background-color: $primary-color;
+  background-color: $secondary-color;
   color: $text-color-light;
 
   &:hover {
-    background-color: ($primary-color, 10%);
+    background-color: ($secondary-color, 10%);
   }
 }
 
-.button-secondary {
+.button-success {
   @include btn-1;
-  background-color: $secondary-color;
+  background-color: rgb(71, 179, 80);
   color: $text-color-light;
+  width: 100%;
 
   &:hover {
     background-color: ($secondary-color, 10%);

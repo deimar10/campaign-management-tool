@@ -1,0 +1,31 @@
+@use '../config' as *;
+
+.custom-modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
+    margin-left: $sidebar-width; // Shift main-content to the right of the sidebar
+    padding: $content-padding; 
+    overflow: auto;
+    .modal-content {
+        background: $text-color-light;
+        display: flex;
+        flex-direction: column;
+        color: $text-color-dark;
+        padding: 2rem;
+        border-radius: 8px;
+        align-items: center;
+        gap: 1rem;
+        h2 {
+            margin: 0;
+        }
+        .modal-icon-container {
+            .success-icon {
+                fill: rgb(71, 179, 80);
+                width: 3rem;
+                height: 3rem;
+            }
+        }
+    }
+}

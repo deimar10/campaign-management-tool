@@ -3,7 +3,7 @@ import '../scss/components/EditModal.scss';
 import { useForm } from "react-hook-form";
 import axios from 'axios';
 
-function Edit({ campaignId, campaignTitle, campaignStatus, onUpdateStatus }) {
+function Edit({ campaignId, campaignTitle, campaignStatus, onUpdateStatus, setModalMessage, sucessModal }) {
 
     const {
         register,
@@ -13,10 +13,12 @@ function Edit({ campaignId, campaignTitle, campaignStatus, onUpdateStatus }) {
 
     const onSubmit = async (data) => {
         try {
-            await axios.put(`${import.meta.env.VITE_API_BASE_URL}/${campaignId}`, {
+            const response = await axios.put(`${import.meta.env.VITE_API_BASE_URL}/${campaignId}`, {
                 status: data.status,
             });
             onUpdateStatus(campaignId, data.status);
+            setModalMessage(response.data.message);
+            sucessModal(true);
         } catch (error) {
             console.error(error);
         };

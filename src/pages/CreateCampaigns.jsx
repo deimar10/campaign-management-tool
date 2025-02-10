@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import Sidebar from "../components/Sidebar";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import axios from 'axios';
+import SuccessModal from '../components/SucessModal';
 
 function CreateCampaigns({ onCampaignUpdate }) {
 
@@ -42,6 +43,8 @@ function CreateCampaigns({ onCampaignUpdate }) {
     }
 
     const [payouts, setPayouts] = useState([]);
+    const [successOpen, setSuccessOpen] = useState(false);
+    const [modalMessage, setModalMessage] = useState("");
 
     const selectedCountry = watch("country");
 
@@ -77,8 +80,8 @@ function CreateCampaigns({ onCampaignUpdate }) {
         })
             .then((response) => {
                 onCampaignUpdate();
-                console.log(response.status, response.data);
-                alert(response.data.message);
+                setModalMessage(response.data.message);
+                setSuccessOpen(true);
                 // Reset the form fields after a successful response
                 resetForm();
             })
@@ -198,7 +201,7 @@ function CreateCampaigns({ onCampaignUpdate }) {
                                             })}
                                         />
                                         {errors.payout && <p className="error-message">{errors.payout.message}</p>}
-                                        <button type="button" className="button-secondary addPayout" onClick={addPayout}>
+                                        <button type="button" className="button-primary addPayout" onClick={addPayout}>
                                             <AddCircleIcon />
                                             Add Payout
                                         </button>
@@ -221,6 +224,8 @@ function CreateCampaigns({ onCampaignUpdate }) {
                     </div>
                 </div>
             </main>
+            {/* Success Modal */}
+            <SuccessModal open={successOpen} message={modalMessage} onClose={() => setSuccessOpen(false)} />
         </div>
     )
 }

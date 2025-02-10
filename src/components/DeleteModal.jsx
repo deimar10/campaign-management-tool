@@ -2,13 +2,15 @@ import React from "react";
 import '../scss/components/EditModal.scss';
 import axios from 'axios';
 
-function deleteModal({ campaignId, campaignTitle, onCampaignUpdate, onClose }) {
+function deleteModal({ campaignId, campaignTitle, onCampaignUpdate, onClose, setModalMessage, sucessModal }) {
 
     const handleDelete = async () => {
         try {
-            await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/${campaignId}`)
+            const response = await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/${campaignId}`)
             onCampaignUpdate();
             onClose();
+            setModalMessage(response.data.message);
+            sucessModal(true);
         } catch (error) {
             console.error(error);
         }

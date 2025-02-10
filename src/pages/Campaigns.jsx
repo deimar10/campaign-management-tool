@@ -5,6 +5,7 @@ import Sidebar from "../components/Sidebar";
 import CampaignFilters from "../components/CampaignFilters";
 import EditModal from '../components/EditModal';
 import DeleteModal from '../components/DeleteModal';
+import SuccessModal from '../components/SucessModal';
 import { Table, TableBody, TableCell, TableHead, TableRow, Tooltip } from "@mui/material";
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CancelIcon from '@mui/icons-material/Cancel';
@@ -21,7 +22,8 @@ function Campaigns({ campaigns, onCampaignUpdate }) {
     });
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-
+    const [successOpen, setSuccessOpen] = useState(false);
+    const [modalMessage, setModalMessage] = useState("");
 
     const handleFilter = ({ search, status }) => {
         let filtered = [...campaigns];;
@@ -143,6 +145,8 @@ function Campaigns({ campaigns, onCampaignUpdate }) {
                                 campaignTitle={selectedCampaign.selectedTitle}
                                 campaignStatus={selectedCampaign.selectedStatus}
                                 onUpdateStatus={updateCampaignStatus}
+                                setModalMessage={setModalMessage}
+                                sucessModal={setSuccessOpen}
                             />
                         ) : null}
                         {isDeleteModalOpen && selectedCampaign.selectedId ? (
@@ -151,10 +155,14 @@ function Campaigns({ campaigns, onCampaignUpdate }) {
                                 campaignTitle={selectedCampaign.selectedTitle}
                                 onCampaignUpdate={onCampaignUpdate}
                                 onClose={() => setIsDeleteModalOpen(false)}
+                                setModalMessage={setModalMessage}
+                                sucessModal={setSuccessOpen}
                             />
                         ) : null}
                     </div>
                 </div>
+                {/* Success Modal */}
+                <SuccessModal open={successOpen} message={modalMessage} onClose={() => setSuccessOpen(false)} />
             </main>
             <div className={isEditModalOpen || isDeleteModalOpen ? 'filter' : ''}></div>
         </div>
