@@ -3,7 +3,7 @@ import '../scss/components/EditModal.scss';
 import { useForm } from "react-hook-form";
 import axios from 'axios';
 
-function Edit({ campaignId, campaignTitle, campaignStatus, onUpdateStatus, setModalMessage, sucessModal, errorModal }) {
+function Edit({ campaignId, campaignTitle, campaignStatus, onUpdateStatus, setModalMessage, successModal, errorModal }) {
 
     const {
         register,
@@ -18,7 +18,7 @@ function Edit({ campaignId, campaignTitle, campaignStatus, onUpdateStatus, setMo
             });
             onUpdateStatus(campaignId, data.status);
             setModalMessage(response.data.message);
-            sucessModal(true);
+            successModal(true);
         } catch (error) {
             console.error(error);
             onUpdateStatus('', '');

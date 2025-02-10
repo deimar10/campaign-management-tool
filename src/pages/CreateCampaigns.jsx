@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import Sidebar from "../components/Sidebar";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import axios from 'axios';
-import SuccessModal from '../components/SucessModal';
+import SuccessModal from '../components/SuccessModal';
 
 function CreateCampaigns({ onCampaignUpdate }) {
 

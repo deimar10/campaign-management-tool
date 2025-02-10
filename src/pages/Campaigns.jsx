@@ -5,7 +5,7 @@ import Sidebar from "../components/Sidebar";
 import CampaignFilters from "../components/CampaignFilters";
 import EditModal from '../components/EditModal';
 import DeleteModal from '../components/DeleteModal';
-import SuccessModal from '../components/SucessModal';
+import SuccessModal from '../components/SuccessModal';
 import ErrorModal from '../components/ErrorModal';
 import { Table, TableBody, TableCell, TableHead, TableRow, Tooltip } from "@mui/material";
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
@@ -148,7 +148,7 @@ function Campaigns({ campaigns, onCampaignUpdate }) {
                                 campaignStatus={selectedCampaign.selectedStatus}
                                 onUpdateStatus={updateCampaignStatus}
                                 setModalMessage={setModalMessage}
-                                sucessModal={setSuccessOpen}
+                                successModal={setSuccessOpen}
                                 errorModal={setErrorOpen}
                             />
                         ) : null}
@@ -159,7 +159,7 @@ function Campaigns({ campaigns, onCampaignUpdate }) {
                                 onCampaignUpdate={onCampaignUpdate}
                                 onClose={() => setIsDeleteModalOpen(false)}
                                 setModalMessage={setModalMessage}
-                                sucessModal={setSuccessOpen}
+                                successModal={setSuccessOpen}
                                 errorModal={setErrorOpen}
                             />
                         ) : null}
